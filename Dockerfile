@@ -31,7 +31,7 @@ RUN apt-get -f install -y \
   texlive-extra-utils \
   libncurses5-dev
 
-WORKDIR toolchain
+WORKDIR /opt
 
 # Download GNU Arm Embedded Toolchain
 #
@@ -41,8 +41,9 @@ RUN wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/8-2019q3/RC1.1
 # Untar the source tarball
 #
 RUN tar -xjf gcc-arm-none-eabi-8-2019-q3-update-src.tar.bz2
+RUN mv gcc-arm-none-eabi-8-2019-q3-update gcc-arm-none-eabi-8-2019-q3-update-unstripped
 
-WORKDIR gcc-arm-none-eabi-8-2019-q3-update
+WORKDIR /opt/gcc-arm-none-eabi-8-2019-q3-update-unstripped
 
 RUN ./install-sources.sh --skip_steps=mingw32
 RUN ./build-prerequisites.sh --skip_steps=mingw32
